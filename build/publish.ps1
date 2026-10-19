@@ -72,7 +72,21 @@ if (-not $iscc) {
     return
 }
 
-& $iscc "/DPublishDir=$publishDir" $iss
+# Inno Setup 6.4 and earlier bundle the unofficial translations; 6.5+ do not. Offer the
+# Traditional Chinese installer UI only when the language file is actually installed.
+$tradIsl = Join-Path (Split-Path -Parent $iscc) 'Languages\ChineseTrad.isl'
+$isccArgs = @()
+if (Test-Path $tradIsl) {
+    $isccArgs += '/DUseChineseTrad'
+    Write-Host 'installer languages: english + chinesetraditional'
+}
+else {
+    Write-Host 'installer languages: english (ChineseTrad.isl not installed)' -ForegroundColor Yellow
+}
+$isccArgs += "/DPublishDir=$publishDir"
+$isccArgs += $iss
+
+& $iscc @isccArgs
 if ($LASTEXITCODE -ne 0) { throw "ISCC failed ($LASTEXITCODE)" }
 
 Get-ChildItem (Join-Path $root 'build\installer\*.exe') | ForEach-Object {

@@ -174,6 +174,10 @@ src\QuickShot\bin\Debug\net8.0-windows\QuickShot.exe
 
 需要 .NET 8 SDK，安裝程式步驟另需 Inno Setup 6。
 
+Inno Setup 6.4（含）以前會附帶非官方翻譯檔，6.5 之後不再附帶。因此在較新的 Inno Setup 上，
+除非 `Languages\ChineseTrad.isl` 存在，否則安裝程式介面只有英文 —— `build\publish.ps1` 會自動偵測，
+能提供繁體中文安裝介面時就一併加入（應用程式本身兩種語言都支援，不受影響）。
+
 ### 專案結構
 
 ```

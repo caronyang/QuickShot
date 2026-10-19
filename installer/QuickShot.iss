@@ -42,7 +42,12 @@ CloseApplications=no
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
+; Inno Setup shipped the unofficial translations up to 6.4; newer versions do not, so this
+; is conditional. Pass /DUseChineseTrad when ChineseTrad.isl is available on the build
+; machine (build\publish.ps1 does that automatically).
+#ifdef UseChineseTrad
 Name: "chinesetraditional"; MessagesFile: "compiler:Languages\ChineseTrad.isl"
+#endif
 
 [Tasks]
 Name: "autostart"; Description: "Start QuickShot when Windows starts (recommended)"; GroupDescription: "Startup and shortcuts:"; Flags: checkedonce

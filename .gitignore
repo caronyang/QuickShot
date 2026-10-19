@@ -1,0 +1,20 @@
+# build output
+[Bb]in/
+[Oo]bj/
+build/publish/
+build/publish-framework/
+build/installer/
+dist/
+
+# IDE / user files
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.userprefs
+
+# OS noise
+Thumbs.db
+desktop.ini
+*.log

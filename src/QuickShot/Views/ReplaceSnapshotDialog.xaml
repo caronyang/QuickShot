@@ -1,0 +1,68 @@
+<Window x:Class="QuickShot.Views.ReplaceSnapshotDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:QuickShot.Resources"
+        Title="{res:Loc Replace_Title}"
+        Width="760"
+        SizeToContent="Height"
+        ResizeMode="NoResize"
+        ShowInTaskbar="True"
+        Topmost="True"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="{StaticResource UiFont}"
+        FontSize="12.5">
+
+    <DockPanel Margin="16">
+
+        <TextBlock x:Name="MessageText"
+                   DockPanel.Dock="Top"
+                   TextWrapping="Wrap"
+                   Margin="0,0,0,12" />
+
+        <StackPanel DockPanel.Dock="Bottom"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0,14,0,0">
+            <Button x:Name="ReplaceButton"
+                    Content="{res:Loc Replace_Replace}"
+                    IsDefault="True"
+                    Width="100"
+                    Padding="0,5"
+                    Margin="0,0,8,0"
+                    Click="OnReplaceClick" />
+            <Button x:Name="CancelButton"
+                    Content="{res:Loc Replace_Cancel}"
+                    IsCancel="True"
+                    Width="100"
+                    Padding="0,5" />
+        </StackPanel>
+
+        <ListBox x:Name="List"
+                 Height="330"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 MouseDoubleClick="OnListDoubleClick"
+                 BorderBrush="#FFB8C2D0">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Width="164" Margin="3">
+                        <Border Height="104"
+                                Background="#FFF2F4F7"
+                                BorderBrush="#FFC3CBD8"
+                                BorderThickness="1">
+                            <Image Source="{Binding Snapshot.Preview}" Stretch="Uniform" Margin="2" />
+                        </Border>
+                        <TextBlock Text="{Binding Caption}"
+                                   FontSize="11"
+                                   Margin="1,3,1,0"
+                                   TextTrimming="CharacterEllipsis" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </DockPanel>
+</Window>

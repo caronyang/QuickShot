@@ -1,0 +1,75 @@
+<Window x:Class="QuickShot.Views.SnapshotWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:QuickShot.Resources"
+        Title="QuickShot"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        ShowActivated="False"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="Manual"
+        UseLayoutRounding="True">
+
+    <Grid>
+        <Border x:Name="Card"
+                Margin="8"
+                CornerRadius="6"
+                Background="{StaticResource CardBrush}"
+                BorderBrush="{StaticResource CardBorderBrush}"
+                BorderThickness="1.5">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="12" ShadowDepth="2" Opacity="0.55" Color="Black" />
+            </Border.Effect>
+
+            <Grid>
+                <Image x:Name="ShotImage"
+                       Stretch="Fill"
+                       RenderOptions.BitmapScalingMode="HighQuality" />
+
+                <!-- the three tiny controls: pin / save / close -->
+                <Border x:Name="Toolbar"
+                        Style="{StaticResource BadgeBorder}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Margin="5"
+                        Opacity="0.35">
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="PinButton"
+                                Style="{StaticResource ToolButton}"
+                                Content="&#xE718;"
+                                ToolTip="{res:Loc Snapshot_Pin}"
+                                Click="OnPinClick" />
+                        <Button x:Name="SaveButton"
+                                Style="{StaticResource ToolButton}"
+                                Content="&#xE74E;"
+                                ToolTip="{res:Loc Snapshot_Save}"
+                                Click="OnSaveClick"
+                                PreviewMouseRightButtonUp="OnSaveAsClick" />
+                        <Button x:Name="CollapseButton"
+                                Style="{StaticResource ToolButton}"
+                                Content="&#xE70E;"
+                                ToolTip="{res:Loc Snapshot_Collapse}"
+                                Click="OnCollapseClick" />
+                        <Button x:Name="CloseButton"
+                                Style="{StaticResource ToolButton}"
+                                Content="&#xE8BB;"
+                                ToolTip="{res:Loc Snapshot_Close}"
+                                Click="OnCloseClick" />
+                    </StackPanel>
+                </Border>
+
+                <Border x:Name="ScaleBadge"
+                        Style="{StaticResource BadgeBorder}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Margin="5"
+                        Visibility="Collapsed">
+                    <TextBlock x:Name="ScaleText" Style="{StaticResource BadgeText}" />
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

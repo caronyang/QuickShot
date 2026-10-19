@@ -1,0 +1,87 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <sys:String x:Key="App_Name">QuickShot</sys:String>
+
+    <!-- 系統匣 -->
+    <sys:String x:Key="Tray_Tooltip">QuickShot — 按 {0} 框選截圖</sys:String>
+    <sys:String x:Key="Tray_Capture">框選截圖（{0}）</sys:String>
+    <sys:String x:Key="Tray_Settings">設定…</sys:String>
+    <sys:String x:Key="Tray_CloseAll">關閉所有漂浮快照</sys:String>
+    <sys:String x:Key="Tray_CollapseAll">收折所有快照成縮圖</sys:String>
+    <sys:String x:Key="Tray_ExpandAll">恢復所有快照</sys:String>
+    <sys:String x:Key="Tray_Exit">結束</sys:String>
+
+    <!-- 漂浮快照右鍵選單 -->
+    <sys:String x:Key="Menu_Save">存檔到預設資料夾</sys:String>
+    <sys:String x:Key="Menu_SaveAs">另存新檔…</sys:String>
+    <sys:String x:Key="Menu_Copy">複製到剪貼簿</sys:String>
+    <sys:String x:Key="Menu_Pin">置頂顯示</sys:String>
+    <sys:String x:Key="Menu_Unpin">取消置頂</sys:String>
+    <sys:String x:Key="Menu_Collapse">收折成縮圖</sys:String>
+    <sys:String x:Key="Menu_Expand">恢復原尺寸</sys:String>
+    <sys:String x:Key="Menu_OpenFolder">開啟存檔資料夾</sys:String>
+    <sys:String x:Key="Menu_Close">關閉</sys:String>
+
+    <!-- 極小按鈕 -->
+    <sys:String x:Key="Snapshot_Save">左鍵：存檔到預設資料夾  ·  右鍵：另存新檔</sys:String>
+    <sys:String x:Key="Snapshot_SaveAs">另存新檔…</sys:String>
+    <sys:String x:Key="Snapshot_Copy">複製</sys:String>
+    <sys:String x:Key="Snapshot_Pin">置頂顯示</sys:String>
+    <sys:String x:Key="Snapshot_Unpin">取消置頂</sys:String>
+    <sys:String x:Key="Snapshot_Close">關閉</sys:String>
+    <sys:String x:Key="Snapshot_Collapse">收折成小縮圖</sys:String>
+    <sys:String x:Key="Snapshot_Expand">恢復原本尺寸</sys:String>
+    <sys:String x:Key="Snapshot_Scale">{0}%</sys:String>
+
+    <!-- 框選遮罩 -->
+    <sys:String x:Key="Overlay_Hint">拖曳框選範圍   ·   按 Esc 取消</sys:String>
+
+    <!-- 取代快照對話框 -->
+    <sys:String x:Key="Replace_Title">已達漂浮快照上限</sys:String>
+    <sys:String x:Key="Replace_Message">目前已有 {0} 個漂浮快照（上限 {1} 個）。請選擇要用這次截圖取代的快照，或按取消放棄這次截圖。</sys:String>
+    <sys:String x:Key="Replace_Replace">取代</sys:String>
+    <sys:String x:Key="Replace_Cancel">取消</sys:String>
+    <sys:String x:Key="Replace_Item">#{0}   {1}   {2}</sys:String>
+
+    <!-- 設定 -->
+    <sys:String x:Key="Settings_Title">QuickShot 設定</sys:String>
+    <sys:String x:Key="Settings_Language">介面語言</sys:String>
+    <sys:String x:Key="Settings_LanguageHint">立即生效，不需重新啟動。</sys:String>
+    <sys:String x:Key="Settings_Hotkey">截圖快捷鍵</sys:String>
+    <sys:String x:Key="Settings_HotkeyHint">點一下欄位後，直接按下想要的組合鍵（需含 Ctrl、Shift、Alt 或 Win）。</sys:String>
+    <sys:String x:Key="Settings_HotkeyReset">回復預設</sys:String>
+    <sys:String x:Key="Settings_HotkeyPressKey">請按下組合鍵…</sys:String>
+    <sys:String x:Key="Settings_AutoStart">開機時自動啟動 QuickShot</sys:String>
+    <sys:String x:Key="Settings_AutoStartHint">寫入目前使用者的登入項目，不需要管理員權限。</sys:String>
+    <sys:String x:Key="Settings_SaveFolder">存檔資料夾</sys:String>
+    <sys:String x:Key="Settings_Browse">瀏覽…</sys:String>
+    <sys:String x:Key="Settings_MaxSnapshots">漂浮快照數量上限</sys:String>
+    <sys:String x:Key="Settings_MaxSnapshotsHint">達到上限時會詢問要用新截圖取代哪一個。</sys:String>
+    <sys:String x:Key="Settings_Opacity">快照透明度</sys:String>
+    <sys:String x:Key="Settings_Notifications">顯示系統匣通知</sys:String>
+    <sys:String x:Key="Settings_PinNew">新快照置頂顯示於其他視窗之上</sys:String>
+    <sys:String x:Key="Settings_Save">儲存</sys:String>
+    <sys:String x:Key="Settings_Cancel">取消</sys:String>
+    <sys:String x:Key="Settings_Saved">設定已儲存</sys:String>
+
+    <!-- 通知 -->
+    <sys:String x:Key="Toast_SavedTitle">快照已儲存</sys:String>
+    <sys:String x:Key="Toast_Saved">已儲存至 {0}</sys:String>
+    <sys:String x:Key="Toast_Copied">快照已複製到剪貼簿</sys:String>
+    <sys:String x:Key="Toast_Discarded">已放棄這次快照 — {0} 個漂浮快照位置已滿</sys:String>
+    <sys:String x:Key="Toast_HotkeyFailed">QuickShot 無法註冊 {0}，請開啟設定改用其他組合鍵。</sys:String>
+    <sys:String x:Key="Toast_SaveFailed">快照儲存失敗：{0}</sys:String>
+    <sys:String x:Key="Toast_StartupDev">偵測到開發版本 — 未變更 Windows 開機啟動項目。</sys:String>
+
+    <!-- 錯誤 -->
+    <sys:String x:Key="Error_InvalidHotkey">不支援這個按鍵組合。</sys:String>
+    <sys:String x:Key="Error_HotkeyNeedsKey">組合鍵必須包含一個按鍵，例如 Win+Shift+Q。</sys:String>
+    <sys:String x:Key="Error_HotkeyNeedsModifier">組合鍵必須包含 Ctrl、Shift、Alt 或 Win。</sys:String>
+    <sys:String x:Key="Error_HotkeyTaken">{0} 已被其他程式使用，請改用其他組合鍵。</sys:String>
+    <sys:String x:Key="Error_HotkeyRegister">無法註冊 {0}（Windows 錯誤碼 {1}）。</sys:String>
+
+    <sys:String x:Key="Dialog_Ok">確定</sys:String>
+
+</ResourceDictionary>

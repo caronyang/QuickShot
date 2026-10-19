@@ -1,0 +1,97 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <FontFamily x:Key="UiFont">Segoe UI</FontFamily>
+    <FontFamily x:Key="GlyphFont">Segoe MDL2 Assets</FontFamily>
+
+    <SolidColorBrush x:Key="AccentBrush" Color="#FF4DA3FF" />
+    <SolidColorBrush x:Key="CardBrush" Color="#FF12161D" />
+    <SolidColorBrush x:Key="CardBorderBrush" Color="#B3FFFFFF" />
+    <SolidColorBrush x:Key="CardTextBrush" Color="#FFEDEFF3" />
+    <SolidColorBrush x:Key="MenuBrush" Color="#FF1B2130" />
+    <SolidColorBrush x:Key="MenuBorderBrush" Color="#FF3A4557" />
+    <SolidColorBrush x:Key="MenuHoverBrush" Color="#FF2F3A4C" />
+
+    <!-- ===== the tiny per-snapshot buttons ================================= -->
+    <Style x:Key="ToolButton" TargetType="Button">
+        <Setter Property="Width" Value="18" />
+        <Setter Property="Height" Value="18" />
+        <Setter Property="FontFamily" Value="{StaticResource GlyphFont}" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="Foreground" Value="#FFEDEFF3" />
+        <Setter Property="Background" Value="#B312161D" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Margin" Value="1,0,0,0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Chrome"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="3"
+                            SnapsToDevicePixels="True">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Margin="0,0,0,1" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Chrome" Property="Background" Value="#E63A4557" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Chrome" Property="Background" Value="#E64DA3FF" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ===== dark context menu used by the floating snapshots ============= -->
+    <Style x:Key="SnapshotMenuItem" TargetType="MenuItem">
+        <Setter Property="Foreground" Value="{StaticResource CardTextBrush}" />
+        <Setter Property="FontFamily" Value="{StaticResource UiFont}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Padding" Value="12,5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <Border x:Name="Chrome" Background="Transparent" Padding="{TemplateBinding Padding}">
+                        <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter TargetName="Chrome" Property="Background" Value="{StaticResource MenuHoverBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="#FF6B7484" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SnapshotContextMenu" TargetType="ContextMenu">
+        <Setter Property="Background" Value="{StaticResource MenuBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource MenuBorderBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource CardTextBrush}" />
+        <Setter Property="Padding" Value="2" />
+    </Style>
+
+    <!-- ===== small dark pill used for badges / size readouts ============== -->
+    <Style x:Key="BadgeBorder" TargetType="Border">
+        <Setter Property="Background" Value="#CC12161D" />
+        <Setter Property="CornerRadius" Value="3" />
+        <Setter Property="Padding" Value="5,2" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <Style x:Key="BadgeText" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource CardTextBrush}" />
+        <Setter Property="FontFamily" Value="{StaticResource UiFont}" />
+        <Setter Property="FontSize" Value="11" />
+    </Style>
+
+</ResourceDictionary>

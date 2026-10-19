@@ -1,0 +1,96 @@
+<Window x:Class="QuickShot.Views.OverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:QuickShot.Resources"
+        Title="QuickShot"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="False"
+        ShowInTaskbar="False"
+        Topmost="True"
+        WindowStartupLocation="Manual"
+        Background="#FF101216"
+        Cursor="None"
+        Focusable="True"
+        UseLayoutRounding="False"
+        SnapsToDevicePixels="True">
+
+    <Grid x:Name="Root" ClipToBounds="True" Background="#FF101216">
+
+        <!-- The frozen screen frame: the user selects on top of the actual pixels. -->
+        <Image x:Name="ScreenImage"
+               Stretch="Fill"
+               HorizontalAlignment="Stretch"
+               VerticalAlignment="Stretch"
+               RenderOptions.BitmapScalingMode="NearestNeighbor" />
+
+        <!-- Everything outside the selection gets dimmed (even-odd hole). -->
+        <Path x:Name="DimPath" Fill="#7F000000" IsHitTestVisible="False" />
+
+        <!-- Aiming aids: full screen guides + a hand drawn high contrast crosshair.
+             The system crosshair is a single thin dark line, which disappears on dark
+             or busy content; these follow the pointer in physical pixel accuracy. -->
+        <Canvas x:Name="CursorLayer" IsHitTestVisible="False" ClipToBounds="True">
+            <Rectangle x:Name="GuideVertical" Width="1" Fill="#665FB0FF" />
+            <Rectangle x:Name="GuideHorizontal" Height="1" Fill="#665FB0FF" />
+            <Path x:Name="CrosshairOutline" Stroke="#E6000000" StrokeThickness="3" />
+            <Path x:Name="CrosshairLine" Stroke="#FFFFFFFF" StrokeThickness="1.4" />
+            <Border x:Name="CursorCoordBadge" Style="{StaticResource BadgeBorder}" Padding="5,1">
+                <TextBlock x:Name="CursorCoordText" Style="{StaticResource BadgeText}" FontSize="10.5" />
+            </Border>
+        </Canvas>
+
+        <Rectangle x:Name="SelectionBorder"
+                   Stroke="#FF4DA3FF"
+                   StrokeThickness="1.5"
+                   Visibility="Collapsed"
+                   IsHitTestVisible="False" />
+
+        <Border x:Name="SizeLabel"
+                Style="{StaticResource BadgeBorder}"
+                Visibility="Collapsed"
+                IsHitTestVisible="False"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
+            <TextBlock x:Name="SizeText" Style="{StaticResource BadgeText}" />
+        </Border>
+
+        <!-- 5x loupe that follows the cursor while dragging. -->
+        <Border x:Name="LoupePanel"
+                Visibility="Collapsed"
+                IsHitTestVisible="False"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                BorderBrush="#FF4DA3FF"
+                BorderThickness="1"
+                Background="#FF101216"
+                Padding="0">
+            <StackPanel>
+                <Border x:Name="LoupeClip" Width="120" Height="90" ClipToBounds="True">
+                    <Image x:Name="LoupeImage"
+                           Width="600"
+                           Height="450"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Stretch="Fill"
+                           RenderOptions.BitmapScalingMode="NearestNeighbor" />
+                </Border>
+                <TextBlock x:Name="LoupeCaption"
+                           Foreground="#FFEDEFF3"
+                           FontFamily="{StaticResource UiFont}"
+                           FontSize="10.5"
+                           Margin="4,2,4,3" />
+            </StackPanel>
+        </Border>
+
+        <Border x:Name="HintPanel"
+                Style="{StaticResource BadgeBorder}"
+                Padding="10,5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Margin="0,26,0,0"
+                IsHitTestVisible="False">
+            <TextBlock Text="{res:Loc Overlay_Hint}" Style="{StaticResource BadgeText}" FontSize="12" />
+        </Border>
+    </Grid>
+</Window>

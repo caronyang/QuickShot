@@ -1,0 +1,87 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <sys:String x:Key="App_Name">QuickShot</sys:String>
+
+    <!-- tray -->
+    <sys:String x:Key="Tray_Tooltip">QuickShot — {0} to capture a region</sys:String>
+    <sys:String x:Key="Tray_Capture">Capture region ({0})</sys:String>
+    <sys:String x:Key="Tray_Settings">Settings…</sys:String>
+    <sys:String x:Key="Tray_CloseAll">Close all snapshots</sys:String>
+    <sys:String x:Key="Tray_CollapseAll">Collapse all to thumbnails</sys:String>
+    <sys:String x:Key="Tray_ExpandAll">Restore all snapshots</sys:String>
+    <sys:String x:Key="Tray_Exit">Exit</sys:String>
+
+    <!-- floating snapshot context menu -->
+    <sys:String x:Key="Menu_Save">Save to default folder</sys:String>
+    <sys:String x:Key="Menu_SaveAs">Save as…</sys:String>
+    <sys:String x:Key="Menu_Copy">Copy to clipboard</sys:String>
+    <sys:String x:Key="Menu_Pin">Keep on top</sys:String>
+    <sys:String x:Key="Menu_Unpin">Stop keeping on top</sys:String>
+    <sys:String x:Key="Menu_Collapse">Collapse to thumbnail</sys:String>
+    <sys:String x:Key="Menu_Expand">Restore full size</sys:String>
+    <sys:String x:Key="Menu_OpenFolder">Open save folder</sys:String>
+    <sys:String x:Key="Menu_Close">Close</sys:String>
+
+    <!-- small buttons -->
+    <sys:String x:Key="Snapshot_Save">Save to default folder (left click) · Save as… (right click)</sys:String>
+    <sys:String x:Key="Snapshot_SaveAs">Save as…</sys:String>
+    <sys:String x:Key="Snapshot_Copy">Copy</sys:String>
+    <sys:String x:Key="Snapshot_Pin">Keep on top</sys:String>
+    <sys:String x:Key="Snapshot_Unpin">Stop keeping on top</sys:String>
+    <sys:String x:Key="Snapshot_Close">Close</sys:String>
+    <sys:String x:Key="Snapshot_Collapse">Collapse to a small thumbnail</sys:String>
+    <sys:String x:Key="Snapshot_Expand">Restore the original size</sys:String>
+    <sys:String x:Key="Snapshot_Scale">{0}%</sys:String>
+
+    <!-- region selection overlay -->
+    <sys:String x:Key="Overlay_Hint">Drag to select a region   ·   Esc to cancel</sys:String>
+
+    <!-- replace dialog -->
+    <sys:String x:Key="Replace_Title">Snapshot limit reached</sys:String>
+    <sys:String x:Key="Replace_Message">You already have {0} floating snapshots and the limit is {1}. Choose the one the new capture should replace, or cancel to discard the new capture.</sys:String>
+    <sys:String x:Key="Replace_Replace">Replace</sys:String>
+    <sys:String x:Key="Replace_Cancel">Cancel</sys:String>
+    <sys:String x:Key="Replace_Item">#{0}   {1}   {2}</sys:String>
+
+    <!-- settings -->
+    <sys:String x:Key="Settings_Title">QuickShot settings</sys:String>
+    <sys:String x:Key="Settings_Language">Language</sys:String>
+    <sys:String x:Key="Settings_LanguageHint">Applies immediately, no restart needed.</sys:String>
+    <sys:String x:Key="Settings_Hotkey">Capture hotkey</sys:String>
+    <sys:String x:Key="Settings_HotkeyHint">Click the box, then press the combination you want (needs Ctrl, Shift, Alt or Win).</sys:String>
+    <sys:String x:Key="Settings_HotkeyReset">Reset to default</sys:String>
+    <sys:String x:Key="Settings_HotkeyPressKey">Press a key combination…</sys:String>
+    <sys:String x:Key="Settings_AutoStart">Start QuickShot when Windows starts</sys:String>
+    <sys:String x:Key="Settings_AutoStartHint">Adds a per-user logon entry. No administrator rights required.</sys:String>
+    <sys:String x:Key="Settings_SaveFolder">Save folder</sys:String>
+    <sys:String x:Key="Settings_Browse">Browse…</sys:String>
+    <sys:String x:Key="Settings_MaxSnapshots">Maximum floating snapshots</sys:String>
+    <sys:String x:Key="Settings_MaxSnapshotsHint">At the limit, a dialog asks which snapshot to replace.</sys:String>
+    <sys:String x:Key="Settings_Opacity">Snapshot opacity</sys:String>
+    <sys:String x:Key="Settings_Notifications">Show tray notifications</sys:String>
+    <sys:String x:Key="Settings_PinNew">Keep new snapshots on top of other windows</sys:String>
+    <sys:String x:Key="Settings_Save">Save</sys:String>
+    <sys:String x:Key="Settings_Cancel">Cancel</sys:String>
+    <sys:String x:Key="Settings_Saved">Settings saved</sys:String>
+
+    <!-- notifications -->
+    <sys:String x:Key="Toast_SavedTitle">Snapshot saved</sys:String>
+    <sys:String x:Key="Toast_Saved">Saved to {0}</sys:String>
+    <sys:String x:Key="Toast_Copied">Snapshot copied to the clipboard</sys:String>
+    <sys:String x:Key="Toast_Discarded">Snapshot discarded — all {0} floating slots are in use</sys:String>
+    <sys:String x:Key="Toast_HotkeyFailed">QuickShot could not register {0}. Open Settings to pick another combination.</sys:String>
+    <sys:String x:Key="Toast_SaveFailed">Could not save the snapshot: {0}</sys:String>
+    <sys:String x:Key="Toast_StartupDev">Development build detected — the Windows startup entry was left untouched.</sys:String>
+
+    <!-- errors -->
+    <sys:String x:Key="Error_InvalidHotkey">That key combination is not supported.</sys:String>
+    <sys:String x:Key="Error_HotkeyNeedsKey">The combination needs a key, for example Win+Shift+Q.</sys:String>
+    <sys:String x:Key="Error_HotkeyNeedsModifier">The combination must include Ctrl, Shift, Alt or Win.</sys:String>
+    <sys:String x:Key="Error_HotkeyTaken">{0} is already used by another program. Please choose a different combination.</sys:String>
+    <sys:String x:Key="Error_HotkeyRegister">Could not register {0} (Windows error {1}).</sys:String>
+
+    <sys:String x:Key="Dialog_Ok">OK</sys:String>
+
+</ResourceDictionary>

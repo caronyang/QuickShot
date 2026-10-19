@@ -9,12 +9,12 @@
 
 [English](README.md) · **繁體中文**
 
-![version](https://img.shields.io/badge/version-1.0.0-2ea44f?style=flat-square)
+![version](https://img.shields.io/badge/version-1.0.1-2ea44f?style=flat-square)
 ![platform](https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D6?style=flat-square&logo=windows&logoColor=white)
 ![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat-square&logo=dotnet&logoColor=white)
 ![license](https://img.shields.io/github/license/caronyang/QuickShot?style=flat-square)
 ![release](https://img.shields.io/github/v/release/caronyang/QuickShot?style=flat-square&sort=semver)
-![downloads](https://img.shields.io/github/downloads/caronyang/QuickShot/total?style=flat-square)
+![downloads](https://img.shields.io/github/downloads/caronyang/QuickShot/total?style=flat-square&label=downloads)
 ![build](https://img.shields.io/github/actions/workflow/status/caronyang/QuickShot/build.yml?branch=main&style=flat-square)
 ![last commit](https://img.shields.io/github/last-commit/caronyang/QuickShot?style=flat-square)
 ![issues](https://img.shields.io/github/issues/caronyang/QuickShot?style=flat-square)
@@ -75,7 +75,7 @@
 
 | | |
 |---|---|
-| **安裝版（建議）** | 從 [Releases](../../releases) 下載 `QuickShot-Setup-1.0.0.exe` 執行 —— 單一使用者安裝到 `%LocalAppData%\Programs\QuickShot`，**不需要管理員權限**，含開始功能表捷徑、反安裝程式，且「開機自動啟動」預設已勾選 |
+| **安裝版（建議）** | 從 [Releases](../../releases) 下載 `QuickShot-Setup-1.0.1.exe` 執行 —— 單一使用者安裝到 `%LocalAppData%\Programs\QuickShot`，**不需要管理員權限**，含開始功能表捷徑、反安裝程式，且「開機自動啟動」預設已勾選 |
 | **免安裝可攜版** | 下載 `QuickShot.exe`（自帶執行階段，約 63 MB），放到任何位置直接執行，不需安裝 .NET |
 | **精簡版** | `.\build\publish.ps1 -Framework` 產生 0.35 MB 的版本，需要 .NET 8 Desktop Runtime，記憶體用量約為一半 |
 
@@ -165,7 +165,7 @@ src\QuickShot\bin\Debug\net8.0-windows\QuickShot.exe
 # 自帶執行階段的單一 exe  ->  build\publish\QuickShot.exe            (62.9 MB)
 .\build\publish.ps1 -SkipInstaller
 
-# 單一 exe + 安裝程式      ->  build\installer\QuickShot-Setup-1.0.0.exe  (58 MB)
+# 單一 exe + 安裝程式      ->  build\installer\QuickShot-Setup-1.0.1.exe  (58 MB)
 .\build\publish.ps1
 
 # 精簡版（需 .NET 8 Desktop Runtime） -> build\publish-framework\        (0.35 MB)

@@ -16,6 +16,7 @@ public partial class SettingsWindow : Window
 
     private HotkeyGesture _gesture;
     private bool _initialised;
+    private bool _applied;
 
     public SettingsWindow(SettingsService settings, App app)
     {
@@ -169,8 +170,25 @@ public partial class SettingsWindow : Window
 
         if (!_app.ApplySettings(candidate)) return;
 
-        DialogResult = true;
+        // This window is opened with Show(), not ShowDialog(), so it must not rely on
+        // DialogResult (WPF throws "DialogResult can be set only after Window is created
+        // and shown as dialog" - which made both buttons look dead).
+        _applied = true;
         Close();
+    }
+
+    private void OnCancelClick(object sender, RoutedEventArgs e) => Close();
+
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+        base.OnKeyDown(e);
+
+        // Esc closes the window (the hotkey box handles Esc itself to revert an edit).
+        if (e.Key == Key.Escape)
+        {
+            e.Handled = true;
+            Close();
+        }
     }
 
     protected override void OnClosed(EventArgs e)
@@ -178,7 +196,7 @@ public partial class SettingsWindow : Window
         base.OnClosed(e);
 
         // Cancelling must undo the live language preview.
-        if (DialogResult != true)
+        if (!_applied)
         {
             LocalizationService.Instance.SetLanguage(_originalLanguage);
         }

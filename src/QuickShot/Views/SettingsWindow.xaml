@@ -158,13 +158,12 @@
                     Margin="0,18,0,0">
             <Button x:Name="SaveButton"
                     Content="{res:Loc Settings_Save}"
-                    IsDefault="True"
                     Width="100" Padding="0,5" Margin="0,0,8,0"
                     Click="OnSaveClick" />
             <Button x:Name="CancelButton"
                     Content="{res:Loc Settings_Cancel}"
-                    IsCancel="True"
-                    Width="100" Padding="0,5" />
+                    Width="100" Padding="0,5"
+                    Click="OnCancelClick" />
         </StackPanel>
     </Grid>
 </Window>

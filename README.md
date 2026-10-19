@@ -10,12 +10,12 @@ with three tiny buttons to pin, save or close it.**
 
 **English** · [繁體中文](README.zh-TW.md)
 
-![version](https://img.shields.io/badge/version-1.0.0-2ea44f?style=flat-square)
+![version](https://img.shields.io/badge/version-1.0.1-2ea44f?style=flat-square)
 ![platform](https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D6?style=flat-square&logo=windows&logoColor=white)
 ![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat-square&logo=dotnet&logoColor=white)
 ![license](https://img.shields.io/github/license/caronyang/QuickShot?style=flat-square)
 ![release](https://img.shields.io/github/v/release/caronyang/QuickShot?style=flat-square&sort=semver)
-![downloads](https://img.shields.io/github/downloads/caronyang/QuickShot/total?style=flat-square)
+![downloads](https://img.shields.io/github/downloads/caronyang/QuickShot/total?style=flat-square&label=downloads)
 ![build](https://img.shields.io/github/actions/workflow/status/caronyang/QuickShot/build.yml?branch=main&style=flat-square)
 ![last commit](https://img.shields.io/github/last-commit/caronyang/QuickShot?style=flat-square)
 ![issues](https://img.shields.io/github/issues/caronyang/QuickShot?style=flat-square)
@@ -82,7 +82,7 @@ Switching the language re-translates the whole UI immediately — no restart.
 
 | | |
 |---|---|
-| **Installer** (recommended) | download `QuickShot-Setup-1.0.0.exe` from [Releases](../../releases), run it — per-user install into `%LocalAppData%\Programs\QuickShot`, **no administrator rights**, Start Menu shortcut, uninstaller, and the "start with Windows" task ticked by default |
+| **Installer** (recommended) | download `QuickShot-Setup-1.0.1.exe` from [Releases](../../releases), run it — per-user install into `%LocalAppData%\Programs\QuickShot`, **no administrator rights**, Start Menu shortcut, uninstaller, and the "start with Windows" task ticked by default |
 | **Portable** | download `QuickShot.exe` (self-contained, ~63 MB) and run it anywhere — no .NET runtime needed |
 | **Framework-dependent** | `.\build\publish.ps1 -Framework` produces a 0.35 MB build that needs the .NET 8 Desktop Runtime and uses about half the memory |
 
@@ -175,7 +175,7 @@ src\QuickShot\bin\Debug\net8.0-windows\QuickShot.exe
 # self-contained single exe  ->  build\publish\QuickShot.exe            (62.9 MB)
 .\build\publish.ps1 -SkipInstaller
 
-# single exe + installer      ->  build\installer\QuickShot-Setup-1.0.0.exe  (58 MB)
+# single exe + installer      ->  build\installer\QuickShot-Setup-1.0.1.exe  (58 MB)
 .\build\publish.ps1
 
 # tiny framework-dependent build -> build\publish-framework\            (0.35 MB)

@@ -155,6 +155,30 @@ function Test-Log([string]$Pattern) {
     return $false
 }
 
+# --- UI Automation: press the real buttons, so a dead button cannot pass silently --------
+function Find-AutomationWindow([string]$name) {
+    try {
+        $root = [System.Windows.Automation.AutomationElement]::RootElement
+        $condition = New-Object System.Windows.Automation.PropertyCondition(
+            [System.Windows.Automation.AutomationElement]::NameProperty, $name)
+        return $root.FindFirst([System.Windows.Automation.TreeScope]::Children, $condition)
+    }
+    catch { return $null }
+}
+
+function Invoke-AutomationButton($window, [string]$name) {
+    if (-not $window) { return $false }
+    $condition = New-Object System.Windows.Automation.PropertyCondition(
+        [System.Windows.Automation.AutomationElement]::NameProperty, $name)
+    $button = $window.FindFirst([System.Windows.Automation.TreeScope]::Descendants, $condition)
+    if (-not $button) { return $false }
+    try {
+        $button.GetCurrentPattern([System.Windows.Automation.InvokePattern]::Pattern).Invoke()
+        return $true
+    }
+    catch { return $false }
+}
+
 # ===================================================================== build
 if (-not $SkipBuild) {
     Write-Host "== building ($Configuration) ==" -ForegroundColor Cyan
@@ -273,6 +297,41 @@ try {
 
     $app.Refresh()
     Report 'memory after the run' $true ("working set {0:N0} MB" -f ($app.WorkingSet64 / 1MB))
+    Stop-QuickShot $app
+
+    # ==================================================== 7 settings dialog
+    Write-Host "== 7 settings dialog (Save / Cancel really work) ==" -ForegroundColor Cyan
+    Add-Type -AssemblyName UIAutomationClient, UIAutomationTypes
+
+    $settingsTitle = 'QuickShot settings'
+    Set-QuickShotConfig '{ "Hotkey": "Ctrl+Shift+P", "Language": "en", "AutoStart": false, "MaxSnapshots": 20 }'
+    $app = Start-Process $Exe -ArgumentList '--settings' -PassThru
+    Start-Sleep -Seconds 4
+
+    $window = Find-AutomationWindow $settingsTitle
+    Report 'settings dialog opens' ($null -ne $window) $(if ($window) { 'window found via UI Automation' } else { 'window not found' })
+
+    # Save must apply the settings, write settings.json and close the window
+    if (Test-Path $Config) { Remove-Item $Config -Force }
+    $clicked = Invoke-AutomationButton $window 'Save'
+    Start-Sleep -Seconds 2
+    $stillOpen = $null -ne (Find-AutomationWindow $settingsTitle)
+    $written = Test-Path $Config
+    Report 'Save writes settings and closes' ($clicked -and $written -and -not $stillOpen) `
+        ("clicked={0} settings.json={1} stillOpen={2}" -f $clicked, $written, $stillOpen)
+
+    # Cancel must close the window without touching settings.json. Launching again goes
+    # through the single instance signalling, which is worth covering too.
+    $stamp = (Get-Item $Config).LastWriteTimeUtc
+    (Start-Process $Exe -ArgumentList '--settings' -PassThru).WaitForExit(5000) | Out-Null
+    Start-Sleep -Seconds 3
+    $window = Find-AutomationWindow $settingsTitle
+    $cancelled = Invoke-AutomationButton $window 'Cancel'
+    Start-Sleep -Seconds 2
+    $stillOpen = $null -ne (Find-AutomationWindow $settingsTitle)
+    $untouched = (Get-Item $Config).LastWriteTimeUtc -eq $stamp
+    Report 'Cancel closes without writing' ($cancelled -and -not $stillOpen -and $untouched) `
+        ("clicked={0} stillOpen={1} settings.json untouched={2}" -f $cancelled, $stillOpen, $untouched)
     Stop-QuickShot $app
 }
 finally {

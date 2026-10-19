@@ -87,7 +87,9 @@ jobs:
           # Never replace an asset that is already attached (a release may have been
           # published locally first, e.g. with an installer the runner cannot build).
           $existing = @(gh release view $tag --json assets --jq '.assets[].name')
-          $files = @(Get-ChildItem 'dist\*.exe', 'build\installer\QuickShot-Setup-*.exe' -ErrorAction SilentlyContinue)
+          # Only the versioned portable name for tags (the upload step renames it), plus the
+          # installer. dist\QuickShot.exe itself would be a duplicate of the renamed copy.
+          $files = @(Get-ChildItem 'dist\QuickShot-*-portable-x64.exe', 'build\installer\QuickShot-Setup-*.exe' -ErrorAction SilentlyContinue)
           foreach ($file in $files) {
             $name = Split-Path $file.FullName -Leaf
             if ($existing -contains $name) { Write-Host "skip $name (already attached)" }

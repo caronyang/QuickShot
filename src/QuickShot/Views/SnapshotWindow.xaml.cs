@@ -15,8 +15,9 @@ using Drawing = System.Drawing;
 namespace QuickShot.Views;
 
 /// <summary>
-/// One floating snapshot: draggable, always-on-top by choice, with three very small
-/// controls (keep on top / save / close) that fade in on hover.
+/// One floating snapshot: draggable, always-on-top by choice, with four very small
+/// controls (keep on top / save / collapse / close) that only exist while the pointer
+/// is inside the card, so they never cover the screenshot.
 /// </summary>
 public partial class SnapshotWindow : Window
 {
@@ -25,7 +26,6 @@ public partial class SnapshotWindow : Window
 
     private const double ShadowMarginDip = 8;
     private const double MaxScreenFraction = 0.7;
-    private const double DimmedToolbarOpacity = 0.35;
     private const int MaxPlacementAttempts = 3;
 
     // Rolled-up thumbnail box, in physical pixels. The maximum keeps a screen full of
@@ -36,7 +36,6 @@ public partial class SnapshotWindow : Window
     private const int ThumbnailMinHeight = 72;
 
     private readonly Snapshot _snapshot;
-    private readonly DispatcherTimer _hideToolbarTimer;
     private readonly Drawing.Point _anchorPoint;
 
     private IntPtr _hwnd;
@@ -57,14 +56,18 @@ public partial class SnapshotWindow : Window
             snapshot.PhysicalBounds.Left + Math.Max(1, snapshot.PhysicalBounds.Width / 2),
             snapshot.PhysicalBounds.Top + Math.Max(1, snapshot.PhysicalBounds.Height / 2));
 
-        _hideToolbarTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2.2) };
-        _hideToolbarTimer.Tick += (_, _) => HideToolbar();
-
         ShotImage.Source = snapshot.Preview;
         Card.MouseLeftButtonDown += OnCardMouseLeftButtonDown;
         Card.MouseRightButtonUp += OnCardMouseRightButtonUp;
-        MouseEnter += (_, _) => ShowToolbar();
-        MouseLeave += (_, _) => _hideToolbarTimer.Start();
+
+        // Clicks on the toolbar's own padding must not start a drag of the snapshot.
+        Toolbar.MouseLeftButtonDown += (_, e) => e.Handled = true;
+
+        // The toolbar is tied to the pointer: it appears the moment the pointer is over
+        // the card and disappears the moment it leaves, so the image stays unobstructed.
+        Card.MouseEnter += (_, _) => ShowToolbar();
+        Card.MouseLeave += (_, _) => HideToolbar();
+        Card.MouseMove += (_, _) => ShowToolbar();
 
         Loaded += OnLoaded;
         DpiChanged += OnDpiChanged;
@@ -103,9 +106,26 @@ public partial class SnapshotWindow : Window
         EnsurePhysicalPlacement();
         UpdateScaleBadge();
 
-        // Show the three controls briefly so they are discoverable, then fade back.
-        ShowToolbar();
-        _hideToolbarTimer.Start();
+        // Usually the pointer is still where the region was dragged out, i.e. on the
+        // card - show the controls then; otherwise they stay hidden until it arrives.
+        Dispatcher.BeginInvoke(new Action(SyncToolbarWithPointer), DispatcherPriority.Input);
+    }
+
+    /// <summary>
+    /// Shows or hides the controls to match the pointer's current position. Used once the
+    /// card has been placed, because a window that simply appears under a resting pointer
+    /// receives no enter / move event to react to.
+    /// </summary>
+    private void SyncToolbarWithPointer()
+    {
+        if (!IsLoaded) return;
+
+        var position = Mouse.GetPosition(Card);
+        var inside = position.X >= 0 && position.Y >= 0 &&
+                     position.X <= Card.ActualWidth && position.Y <= Card.ActualHeight;
+
+        if (inside) ShowToolbar();
+        else HideToolbar();
     }
 
     private void OnDpiChanged(object sender, DpiChangedEventArgs e)
@@ -267,21 +287,22 @@ public partial class SnapshotWindow : Window
 
     private void ShowToolbar()
     {
-        _hideToolbarTimer.Stop();
-        Toolbar.Opacity = 1.0;
-        Toolbar.IsHitTestVisible = true;
+        if (Toolbar.Visibility == Visibility.Visible) return;
+        Toolbar.Visibility = Visibility.Visible;
     }
 
     private void HideToolbar()
     {
-        _hideToolbarTimer.Stop();
-        Toolbar.Opacity = DimmedToolbarOpacity;
-        Toolbar.IsHitTestVisible = false;
+        Toolbar.Visibility = Visibility.Collapsed;
     }
 
     private void UpdatePinVisual()
     {
-        PinButton.Content = Topmost ? "\uE77A" : "\uE718";
+        // State, not action: a highlighted solid pin means "kept on top", a muted
+        // crossed-out pin means "normal window". The tooltip names the action.
+        PinButton.Content = Topmost ? "\uE718" : "\uE77A";
+        PinButton.Foreground = (TryFindResource(Topmost ? "AccentBrush" : "CardTextBrush") as System.Windows.Media.Brush)
+                               ?? System.Windows.Media.Brushes.White;
         PinButton.ToolTip = LocalizationService.Instance[Topmost ? "Snapshot_Unpin" : "Snapshot_Pin"];
     }
 
@@ -377,9 +398,6 @@ public partial class SnapshotWindow : Window
         // Re-anchor once the SizeToContent pass has run, so the corner really stays put.
         UpdateLayout();
         RestorePhysicalOrigin(originX, originY);
-
-        ShowToolbar();
-        _hideToolbarTimer.Start();
     }
 
     private (int X, int Y) CurrentPhysicalOrigin()

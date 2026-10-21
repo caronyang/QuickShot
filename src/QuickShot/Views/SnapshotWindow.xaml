@@ -29,13 +29,15 @@
                        Stretch="Fill"
                        RenderOptions.BitmapScalingMode="HighQuality" />
 
-                <!-- the three tiny controls: pin / save / close -->
+                <!-- the tiny controls: pin / save / collapse / close. They only
+                     exist while the pointer is over the card, so they never sit
+                     on top of the screenshot. -->
                 <Border x:Name="Toolbar"
                         Style="{StaticResource BadgeBorder}"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
                         Margin="5"
-                        Opacity="0.35">
+                        Visibility="Collapsed">
                     <StackPanel Orientation="Horizontal">
                         <Button x:Name="PinButton"
                                 Style="{StaticResource ToolButton}"

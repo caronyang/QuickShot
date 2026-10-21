@@ -5,12 +5,13 @@
 </p>
 
 **A tray-resident screenshot tool for Windows: press a global hotkey, drag a rectangle, and the
-capture instantly floats on top of your desktop — movable, always-on-top if you want,
-with three tiny buttons to pin, save or close it.**
+capture instantly floats on top of your desktop — movable, always-on-top if you want, with
+four tiny buttons (pin / save / collapse / close) that appear only while the pointer is over
+the snapshot.**
 
 **English** · [繁體中文](README.zh-TW.md)
 
-![version](https://img.shields.io/badge/version-1.0.1-2ea44f?style=flat-square)
+![version](https://img.shields.io/badge/version-1.0.2-2ea44f?style=flat-square)
 ![platform](https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D6?style=flat-square&logo=windows&logoColor=white)
 ![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat-square&logo=dotnet&logoColor=white)
 ![license](https://img.shields.io/github/license/caronyang/QuickShot?style=flat-square)
@@ -45,9 +46,11 @@ small badge is the pointer position in physical pixels, and the magnifier reads 
 
 ![Three floating snapshots with their tiny toolbars](screenshot/snapshots.png)
 
-Each snapshot floats exactly over the region it came from, with the three (four once you count
-collapse) 18 × 18 px controls fading in on hover: 📌 always-on-top, 💾 save, ⌃ collapse,
-✕ close. Drag the body to move it, double-click to toggle 1:1 / fit.
+Each snapshot floats exactly over the region it came from, with the four 18 × 18 px controls
+(📌 always-on-top, 💾 save, ⌃ collapse, ✕ close) appearing only while the pointer is over the
+card and vanishing the instant it leaves, so they never sit on top of the screenshot. The pin
+is colour-coded: **blue** means the snapshot is kept on top, **white** means it is an ordinary
+window. Drag the body to move it, double-click to toggle 1:1 / fit.
 
 ### Collapsed
 
@@ -82,8 +85,8 @@ Switching the language re-translates the whole UI immediately — no restart.
 
 | | |
 |---|---|
-| **Installer** (recommended) | download `QuickShot-Setup-1.0.1.exe` from [Releases](../../releases), run it — per-user install into `%LocalAppData%\Programs\QuickShot`, **no administrator rights**, Start Menu shortcut, uninstaller, and the "start with Windows" task ticked by default |
-| **Portable** | download `QuickShot.exe` (self-contained, ~63 MB) and run it anywhere — no .NET runtime needed |
+| **Installer** (recommended) | download `QuickShot-Setup-1.0.2.exe` from [Releases](../../releases), run it — per-user install into `%LocalAppData%\Programs\QuickShot`, **no administrator rights**, Start Menu shortcut, uninstaller, and the "start with Windows" task ticked by default |
+| **Portable** | download `QuickShot-<version>-portable-x64.exe` (self-contained, ~63 MB) and run it anywhere — no .NET runtime needed |
 | **Framework-dependent** | `.\build\publish.ps1 -Framework` produces a 0.35 MB build that needs the .NET 8 Desktop Runtime and uses about half the memory |
 
 Requirements: Windows 10 1809+ or Windows 11, x64, nothing else.
@@ -102,7 +105,7 @@ Requirements: Windows 10 1809+ or Windows 11, x64, nothing else.
 | Restore the original size | the ⌄ button, or the right-click menu |
 | Collapse / restore **all** snapshots | tray menu → *Collapse all to thumbnails* / *Restore all snapshots* |
 | Save | the 💾 button — left click saves to the default folder, right click is *Save as…* |
-| Keep on top | the 📌 button, or the right-click menu |
+| Keep on top | the 📌 button (blue = kept on top), or the right-click menu |
 | Close / close all | the ✕ button; tray menu → *Close all snapshots* |
 | Settings | tray menu → *Settings…* |
 
@@ -175,7 +178,7 @@ src\QuickShot\bin\Debug\net8.0-windows\QuickShot.exe
 # self-contained single exe  ->  build\publish\QuickShot.exe            (62.9 MB)
 .\build\publish.ps1 -SkipInstaller
 
-# single exe + installer      ->  build\installer\QuickShot-Setup-1.0.1.exe  (58 MB)
+# single exe + installer      ->  build\installer\QuickShot-Setup-1.0.2.exe  (58 MB)
 .\build\publish.ps1
 
 # tiny framework-dependent build -> build\publish-framework\            (0.35 MB)

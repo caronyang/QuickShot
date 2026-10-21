@@ -2,6 +2,7 @@
 [Bb]in/
 [Oo]bj/
 build/publish/
+build/publish-test/
 build/publish-framework/
 build/installer/
 dist/

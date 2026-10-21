@@ -5,11 +5,11 @@
 </p>
 
 **常駐在系統匣的 Windows 截圖工具：按下全域快捷鍵、拖曳框選一個範圍，快照就會立刻漂浮在桌面上 ——
-可以任意拖移、可選擇置頂，並有三顆極小的按鈕可以置頂、存檔、關閉。**
+可以任意拖移、可選擇置頂，並有四顆極小按鈕（置頂／存檔／收折／關閉）只在滑鼠移到快照上時出現。**
 
 [English](README.md) · **繁體中文**
 
-![version](https://img.shields.io/badge/version-1.0.1-2ea44f?style=flat-square)
+![version](https://img.shields.io/badge/version-1.0.2-2ea44f?style=flat-square)
 ![platform](https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D6?style=flat-square&logo=windows&logoColor=white)
 ![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat-square&logo=dotnet&logoColor=white)
 ![license](https://img.shields.io/github/license/caronyang/QuickShot?style=flat-square)
@@ -42,8 +42,10 @@
 
 ![三個漂浮快照與它們的極小工具列](screenshot/snapshots.png)
 
-每個快照都精確浮在它被框取的位置上，滑鼠移入時會浮現 18 × 18 px 的極小按鈕：
-📌 置頂、💾 存檔、⌃ 收折、✕ 關閉。拖曳本體可移動，雙擊可在 1:1 與縮放顯示之間切換。
+每個快照都精確浮在它被框取的位置上，只有滑鼠停在卡片上時才會出現 18 × 18 px 的極小按鈕
+（📌 置頂、💾 存檔、⌃ 收折、✕ 關閉），滑鼠一離開就立刻消失，不會擋住畫面內容。
+圖釘會以顏色顯示目前狀態：**藍色**代表置頂、**白色**代表一般視窗。
+拖曳本體可移動，雙擊可在 1:1 與縮放顯示之間切換。
 
 ### 收折成縮圖
 
@@ -75,8 +77,8 @@
 
 | | |
 |---|---|
-| **安裝版（建議）** | 從 [Releases](../../releases) 下載 `QuickShot-Setup-1.0.1.exe` 執行 —— 單一使用者安裝到 `%LocalAppData%\Programs\QuickShot`，**不需要管理員權限**，含開始功能表捷徑、反安裝程式，且「開機自動啟動」預設已勾選 |
-| **免安裝可攜版** | 下載 `QuickShot.exe`（自帶執行階段，約 63 MB），放到任何位置直接執行，不需安裝 .NET |
+| **安裝版（建議）** | 從 [Releases](../../releases) 下載 `QuickShot-Setup-1.0.2.exe` 執行 —— 單一使用者安裝到 `%LocalAppData%\Programs\QuickShot`，**不需要管理員權限**，含開始功能表捷徑、反安裝程式，且「開機自動啟動」預設已勾選 |
+| **免安裝可攜版** | 下載 `QuickShot-<version>-portable-x64.exe`（自帶執行階段，約 63 MB），放到任何位置直接執行，不需安裝 .NET |
 | **精簡版** | `.\build\publish.ps1 -Framework` 產生 0.35 MB 的版本，需要 .NET 8 Desktop Runtime，記憶體用量約為一半 |
 
 系統需求：Windows 10 1809+ 或 Windows 11，x64，不需其他元件。
@@ -95,7 +97,7 @@
 | 恢復原尺寸 | `⌄` 按鈕，或右鍵選單 |
 | **全部收折／全部恢復** | 托盤選單 →「收折所有快照成縮圖」／「恢復所有快照」 |
 | 存檔 | `💾` 按鈕 —— 左鍵存到預設資料夾，右鍵為「另存新檔…」 |
-| 置頂 | `📌` 按鈕，或右鍵選單 |
+| 置頂 | `📌` 按鈕（藍色代表置頂），或右鍵選單 |
 | 關閉／全部關閉 | `✕` 按鈕；托盤選單 →「關閉所有漂浮快照」 |
 | 設定 | 托盤選單 →「設定…」 |
 
@@ -165,7 +167,7 @@ src\QuickShot\bin\Debug\net8.0-windows\QuickShot.exe
 # 自帶執行階段的單一 exe  ->  build\publish\QuickShot.exe            (62.9 MB)
 .\build\publish.ps1 -SkipInstaller
 
-# 單一 exe + 安裝程式      ->  build\installer\QuickShot-Setup-1.0.1.exe  (58 MB)
+# 單一 exe + 安裝程式      ->  build\installer\QuickShot-Setup-1.0.2.exe  (58 MB)
 .\build\publish.ps1
 
 # 精簡版（需 .NET 8 Desktop Runtime） -> build\publish-framework\        (0.35 MB)

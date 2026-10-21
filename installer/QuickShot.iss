@@ -3,7 +3,7 @@
 ; or just run build\publish.ps1 which does both steps.
 
 #define MyAppName "QuickShot"
-#define MyAppVersion "1.0.1"
+#define MyAppVersion "1.0.2"
 #define MyAppPublisher "QuickShot"
 #define MyAppExeName "QuickShot.exe"
 
